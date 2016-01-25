@@ -1,0 +1,25 @@
+{
+  "name": "angular-service",
+  "homepage": "https://github.com/Jeff-Tian/angular-service",
+  "authors": [
+    "jeff.tian@outlook.com"
+  ],
+  "description": "Wrap $http to handle service's 200 OK error response.",
+  "main": "src/service.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "angular",
+    "service",
+    "http"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
