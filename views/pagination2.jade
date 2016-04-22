@@ -1,0 +1,7 @@
+mixin pagination2(data)
+    div(class="ui pagination borderless right floated menu", style="border: none; box-shadow: none;", ng-show="#{data}.records[0].length", ng-cloak="")
+        a(class="item", ng-click="#{data}.getPrevPage()", ng-show="#{data}.pageIndex > 0", ng-cloak="", style="color: grey;") 上一页
+        a(class="red item", ng-click="#{data}.pageIndex = $index", ng-repeat="page in #{data}.getPages() track by $index", ng-class="{'active': $index === #{data}.pageIndex}", style="color: grey; background-color: transparent;", ng-show="#{data}.records.length > 1", ng-cloak="") {{$index + 1}}
+        a(class="item", ng-click="#{data}.getNextPage()", ng-show="#{data}.records.length - 1 > #{data}.pageIndex || #{data}.pageState", ng-cloak="", style="color: grey;") 下一页
+    div(class="ui segment", style="border: none; margin: 0;", ng-hide="#{data}.records[0].length", ng-cloak="")
+        div(class="sub header") 没有数据
