@@ -1,12 +1,16 @@
 angular.module('servicesModule')
     .factory('paginationData', ['service', function (service) {
-        function paginationData(sourceUrl, queryData) {
+        function paginationData(sourceUrl, queryData, dataField, dataMapping) {
             this.records = [];
             this.pageState = null;
             this.pageIndex = -1;
             this.sourceUrl = sourceUrl;
             this.queryData = queryData;
             this.fetching = false;
+            this.dataField = dataField || 'data';
+            this.dataMapping = dataMapping || function (data) {
+                    return data;
+                };
         }
 
         paginationData.prototype.getNextPage = function (data) {
@@ -20,9 +24,9 @@ angular.module('servicesModule')
                             pageState: self.pageState
                         }))
                         .then(function (result) {
-                            if (result.data) {
+                            if (result[this.dataField]) {
                                 self.pageIndex++;
-                                self.records.push(result.data);
+                                self.records.push(this.dataMapping(result.data));
                             }
 
                             self.pageState = result.pageState;
