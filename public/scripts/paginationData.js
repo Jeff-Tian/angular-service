@@ -19,6 +19,7 @@ angular.module('servicesModule')
 
                 this.dataField = options.dataField || this.dataField;
                 this.dataMapping = options.dataMapping || this.dataMapping;
+                this.pageSize = options.pageSize;
             } else {
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
@@ -32,7 +33,8 @@ angular.module('servicesModule')
                 var self = this;
                 service.executePromiseAvoidDuplicate(this, 'fetching', function () {
                     return service.post(self.sourceUrl, angular.extend({}, self.queryData, data, {
-                            pageState: self.pageState
+                            pageState: self.pageState,
+                            pageSize: self.pageSize
                         }))
                         .then(function (result) {
                             if (result[self.dataField]) {
