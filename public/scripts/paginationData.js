@@ -35,9 +35,9 @@ angular.module('servicesModule')
                             pageState: self.pageState
                         }))
                         .then(function (result) {
-                            if (result[this.dataField]) {
+                            if (result[self.dataField]) {
                                 self.pageIndex++;
-                                self.records.push(this.dataMapping(result.data));
+                                self.records.push(self.dataMapping(result.data));
                             }
 
                             self.pageState = result.pageState;
