@@ -10,7 +10,6 @@ angular.module('servicesModule')
             this.dataMapping = function (data) {
                 return data;
             };
-            this.httpMethod = 'post';
 
             if (typeof sourceUrl === 'object' && arguments.length === 1) {
                 var options = sourceUrl;
@@ -20,7 +19,6 @@ angular.module('servicesModule')
 
                 this.dataField = options.dataField || this.dataField;
                 this.dataMapping = options.dataMapping || this.dataMapping;
-                this.httpMethod = options.httpMethod || this.httpMethod;
             } else {
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
@@ -33,9 +31,9 @@ angular.module('servicesModule')
             } else {
                 var self = this;
                 service.executePromiseAvoidDuplicate(this, 'fetching', function () {
-                    return service[this.httpMethod](self.sourceUrl, angular.extend({}, self.queryData, data, {
-                        pageState: self.pageState
-                    }))
+                    return service.post(self.sourceUrl, angular.extend({}, self.queryData, data, {
+                            pageState: self.pageState
+                        }))
                         .then(function (result) {
                             if (result[this.dataField]) {
                                 self.pageIndex++;
