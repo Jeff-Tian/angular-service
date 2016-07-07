@@ -21,5 +21,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "angular": "^1.5.5"
+  }
 }

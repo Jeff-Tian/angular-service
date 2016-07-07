@@ -1,3 +1,16 @@
+var url = {
+    parse: function (url) {
+        var l = document.createElement('a');
+        l.href = url;
+        return l;
+    }
+};
+
+var scripts = document.getElementsByTagName('script');
+var path = scripts[scripts.length - 1].src.split('?')[0];      // remove any ?query
+var mydir = path.split('/').slice(0, -1).join('/') + '/';  // remove last filename part of path
+var scriptLocation = url.parse(mydir);
+
 /**
  * A $http wrapper that dedicate to pre handle the return data by service api. For example, check the
  * isSuccess and invoke the successCallback and errorCallback accordingly.
@@ -92,6 +105,16 @@ angular.module('servicesModule')
             return promise().finally(function () {
                 scope[flag] = false;
             });
+        };
+
+        s.postSync = function (url) {
+            var worker = new Worker(mydir + 'syncRequest.js');
+            worker.onmessage = function (event) {
+                console.log(event);
+                alert(event.data);
+            };
+
+            worker.postMessage('POST');
         };
 
         // s' own properties

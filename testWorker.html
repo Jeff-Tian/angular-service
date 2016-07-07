@@ -1,0 +1,30 @@
+<html>
+<head><title>Test Worker</title></head>
+<body>
+<button onclick="doIt();">Do it</button>
+<div ng-app="testApp" ng-controller="testCtrl">
+    <button ng-click="doItAngularWay()">Do it angular way</button>
+</div>
+<script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="./public/scripts/app.js"></script>
+<script type="text/javascript" src="./public/scripts/service.js"></script>
+<script type="text/javascript">
+    function doIt() {
+        var worker = new Worker('./public/scripts/syncRequest.js');
+        worker.onmessage = function (event) {
+            console.log(event);
+            alert(event.data);
+        };
+
+        worker.postMessage('Hello');
+    }
+
+    angular.module('testApp', ['servicesModule'])
+            .controller('testCtrl', ['$scope', 'service', function ($scope, service) {
+                $scope.doItAngularWay = function () {
+                    service.postSync();
+                };
+            }]);
+</script>
+</body>
+</html>

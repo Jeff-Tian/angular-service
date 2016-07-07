@@ -4,11 +4,12 @@ var
     runSequence = require('run-sequence'),
     uglify = require('gulp-uglify'),
     clean = require('gulp-clean'),
-    uglifyCss = require('gulp-minify-css')
+    uglifyCss = require('gulp-minify-css'),
+    concat = require('gulp-concat')
     ;
 
 gulp.task('build', function (done) {
-    runSequence('clean', 'copy', 'uglify-js', 'uglify-css', done);
+    runSequence('clean', 'copy', 'uglify-js', 'uglify-and-concat-js', 'uglify-css', done);
 });
 gulp.task('default', ['build']);
 
@@ -27,6 +28,14 @@ gulp.task('copy', function (done) {
 gulp.task('uglify-js', function (done) {
     return gulp.src('public/scripts/*.js')
         .pipe(uglify())
+        .pipe(gulp.dest('dist/scripts'))
+        ;
+});
+
+gulp.task('uglify-and-concat-js', function (done) {
+    return gulp.src('public/scripts/*.js')
+        .pipe(uglify())
+        .pipe(concat('all.min.js'))
         .pipe(gulp.dest('dist/scripts'))
         ;
 });
