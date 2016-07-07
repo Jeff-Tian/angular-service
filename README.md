@@ -5,6 +5,11 @@ Wrap pagination data to handle pageState indicated pagination data.
 # Contribution Notice:
 Run `gulp` before making `git commit`. So the `dist` folder will be updated.
 
+# Install
+```
+bower install angular-service
+```
+
 # Basic Usage
 ```
 script(src="#{cdn.normal}bower_components/angular/angular.min.js?#{cdn.version}")
