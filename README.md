@@ -11,6 +11,10 @@ script(src="#{cdn.normal}bower_components/angular/angular.min.js?#{cdn.version}"
 script(src="#{cdn.normal}bower_components/angular-service/dist/scripts/all.js?#{cdn.version}")
 
 script.
-    service.get('xxx', {}).then(success, fail);
+    angular.module('yourModule', ['servicesModule'])
+        .controller('yourCtrl', ['service', function(service){
+            service.get('xxx', {}).then(success, fail);
+        }])
+    ;
 
 ```
