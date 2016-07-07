@@ -11,7 +11,7 @@ bower install angular-service
 ```
 
 # Basic Usage
-```
+```jade
 script(src="#{cdn.normal}bower_components/angular/angular.min.js?#{cdn.version}")
 script(src="#{cdn.normal}bower_components/angular-service/dist/scripts/all.js?#{cdn.version}")
 
@@ -53,7 +53,7 @@ javascript
 angular.module('yourModule', ['servicesModule'])
     .controller('yourCtrl', ['$scope', 'service', 'paginationData', function ($scope, service, paginationData) {
         $scope.yourDataRecords = new paginationData('http://your/data/source/url');
-        $scope.coinHistory.getNextPage();
+        $scope.yourDataRecords.getNextPage();
     }])
 ;
 ```
