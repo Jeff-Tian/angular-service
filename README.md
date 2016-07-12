@@ -10,6 +10,11 @@ Run `gulp` before making `git commit`. So the `dist` folder will be updated.
 bower install angular-service
 ```
 
+# Update 
+```
+bower update angular-service
+```
+
 # Basic Usage
 ```jade
 script(src="#{cdn.normal}bower_components/angular/angular.min.js?#{cdn.version}")
