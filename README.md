@@ -30,7 +30,10 @@ script.
 ```
 
 # Pagination Usage
-jade/pug template (Still haven't been using jade/pug? Use it, and convert your existing html to jade/pug by this tool: http://html2pug.jijiyy.me/)
+**Screen shot:**
+![Screen shot of pagination](assets/pagination.png)
+
+**jade/pug template (Still haven't been using jade/pug? Use it, and convert your existing html to jade/pug by this tool: http://html2pug.jijiyy.me/)**
 ```jade
 div(ng-controller="yourCtrl")
     table.ui.single.line.table
@@ -49,11 +52,13 @@ div(ng-controller="yourCtrl")
                     div(ng-repeat="p in record.product") {{p.name}}
                 td.ui.middle.aligned
                     span.middle.aligned {{record.type === 'I' ? '+' : (record.type === 'E' ? '-' : '')}}{{record.amount}}
-    div
-        include ../../public/bower_components/angular-service/views/pagination2.jade
-        + pagination2('yourDataRecords')
+        tfoot
+            tr
+                th(colspan="3")
+                    include ../../public/bower_components/angular-service/views/pagination2.jade
+                    + pagination2('yourDataRecords')
 ```
-javascript
+**javascript**
 ```javascript
 angular.module('yourModule', ['servicesModule'])
     .controller('yourCtrl', ['$scope', 'service', 'paginationData', function ($scope, service, paginationData) {
