@@ -1,0 +1,1 @@
+self.onmessage=function(e){if("POST"===e.data){var s=new XMLHttpRequest;s.open("POST","./app.js",!1),s.send(null),self.postMessage(s.responseText)}};
