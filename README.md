@@ -55,5 +55,13 @@ angular.module('yourModule', ['servicesModule'])
         $scope.yourDataRecords = new paginationData('http://your/data/source/url');
         $scope.yourDataRecords.getNextPage();
     }])
+    .controller('anotherCtrl', ['$scope', 'service', 'paginationData', function ($scope, service, paginationData) {
+        $scope.yourDataRecords = new paginationData('http://your/data/source/url', {pageSize: 5});
+        $scope.yourDataRecords.getNextPage();
+    }])
+    .controller('yetAnotherCtrl', ['$scope', 'service', 'paginationData', function ($scope, service, paginationData) {
+        $scope.yourDataRecords = new paginationData('http://your/data/source/url');
+        $scope.yourDataRecords.getNextPage({pageSize: 15});
+    }])
 ;
 ```

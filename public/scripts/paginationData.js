@@ -32,10 +32,10 @@ angular.module('servicesModule')
             } else {
                 var self = this;
                 service.executePromiseAvoidDuplicate(this, 'fetching', function () {
-                    return service.post(self.sourceUrl, angular.extend({}, self.queryData, data, {
-                            pageState: self.pageState,
-                            pageSize: self.pageSize
-                        }))
+                    return service.post(self.sourceUrl, angular.extend({}, self.queryData, {
+                        pageState: self.pageState,
+                        pageSize: self.pageSize
+                    }, data))
                         .then(function (result) {
                             if (result[self.dataField]) {
                                 self.pageIndex++;
