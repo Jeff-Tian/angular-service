@@ -119,6 +119,16 @@ angular.module('servicesModule')
             return new Array(this.records.length);
         };
 
+        paginationData.prototype.getTotalRecords = function () {
+            var sum = 0;
+
+            for (var i = 0; i < this.records.length; i++) {
+                sum += this.records[i].length;
+            }
+
+            return sum;
+        };
+
         return paginationData;
     }])
 ;
