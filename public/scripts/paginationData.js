@@ -66,6 +66,7 @@ angular.module('servicesModule')
             this.fetching = false;
 
             this.dataField = 'data';
+            this.totalField = 'total';
             this.dataMapping = function (data) {
                 return data;
             };
@@ -99,6 +100,10 @@ angular.module('servicesModule')
                             if (result[self.dataField]) {
                                 self.pageIndex++;
                                 self.records.push(self.dataMapping(result[self.dataField]));
+                            }
+
+                            if (result[self.totalField]) {
+                                self.total = result[self.totalField];
                             }
                         })
                         ;
