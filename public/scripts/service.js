@@ -52,7 +52,7 @@ angular.module('servicesModule')
             httpPromise
                 .success(function (res) {
                     if (res.isSuccess) {
-                        dfd.resolve(res.result);
+                        dfd.resolve(res.result || res.results);
                     } else {
                         console.error(res);
                         console.error(httpPromise.value);
