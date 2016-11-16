@@ -6,6 +6,11 @@ Wrap pagination data to handle pageState indicated pagination data.
 Run `gulp` before making `git commit`. So the `dist` folder will be updated.
 
 # Install
+ - Via npm
+```
+npm install angular-service
+```
+ - Via bower
 ```
 bower install angular-service
 ```
