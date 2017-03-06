@@ -36,10 +36,18 @@ angular.module('servicesModule')
             } else {
                 var self = this;
 
-                return $http[self.method](self.sourceUrl, angular.extend({}, self.queryData, {
+                var pageData = angular.extend({}, self.queryData, {
                     pageState: self.pageState,
                     pageSize: self.pageSize
-                }, data)).then(function (result) {
+                }, data);
+
+                if (self.method === 'get') {
+                    pageData = {
+                        params: pageData
+                    };
+                }
+
+                return $http[self.method](self.sourceUrl, pageData).then(function (result) {
                     result = result.data;
 
                     if (result[self.dataField]) {
