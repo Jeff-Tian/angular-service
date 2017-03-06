@@ -11,6 +11,8 @@ angular.module('servicesModule')
                 return data;
             };
 
+            this.method = 'get';
+
             if (typeof sourceUrl === 'object' && arguments.length === 1) {
                 var options = sourceUrl;
 
@@ -34,7 +36,7 @@ angular.module('servicesModule')
             } else {
                 var self = this;
 
-                $http.post(self.sourceUrl, angular.extend({}, self.queryData, {
+                $http[self.method](self.sourceUrl, angular.extend({}, self.queryData, {
                     pageState: self.pageState,
                     pageSize: self.pageSize
                 }, data))
