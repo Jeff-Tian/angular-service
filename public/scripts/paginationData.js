@@ -32,26 +32,25 @@ angular.module('servicesModule')
             if (this.pageIndex < (this.records.length - 1)) {
                 this.pageIndex++;
 
-                $q.resolve(this.records[this.pageIndex]);
+                return $q.resolve(this.records[this.pageIndex]);
             } else {
                 var self = this;
 
-                $http[self.method](self.sourceUrl, angular.extend({}, self.queryData, {
+                return $http[self.method](self.sourceUrl, angular.extend({}, self.queryData, {
                     pageState: self.pageState,
                     pageSize: self.pageSize
-                }, data))
-                    .then(function (result) {
-                        result = result.data;
+                }, data)).then(function (result) {
+                    result = result.data;
 
-                        if (result[self.dataField]) {
-                            self.pageIndex++;
-                            self.records.push(self.dataMapping(result[self.dataField]));
-                        }
+                    if (result[self.dataField]) {
+                        self.pageIndex++;
+                        self.records.push(self.dataMapping(result[self.dataField]));
+                    }
 
-                        self.pageState = result.pageState;
+                    self.pageState = result.pageState;
 
-                        return result;
-                    });
+                    return result;
+                });
             }
         };
 
