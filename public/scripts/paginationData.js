@@ -25,6 +25,7 @@ angular.module('servicesModule')
             } else {
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
+                this.pageSize = queryData.pageSize;
             }
         }
 
