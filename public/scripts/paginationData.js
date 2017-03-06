@@ -56,7 +56,11 @@ angular.module('servicesModule')
                         self.records.push(self.dataMapping(result[self.dataField]));
                     }
 
-                    self.pageState = result.pageState;
+                    if (result.pageState !== self.pageState) {
+                        self.pageState = result.pageState;
+                    } else {
+                        self.pageState = null;
+                    }
 
                     return result;
                 });
