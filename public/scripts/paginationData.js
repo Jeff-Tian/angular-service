@@ -78,12 +78,16 @@ angular.module('servicesModule')
             }
         }
 
+        function runDataGotCallback(self, result) {
+            if (typeof self.dataGotCallback === 'function') {
+                self.dataGotCallback(result);
+            }
+        }
+
         paginationData.prototype.getNextPage = function (data) {
             var self = this;
             return getNextPage(this, data).then(function (result) {
-                if (typeof self.dataGotCallback === 'function') {
-                    self.dataGotCallback(result);
-                }
+                runDataGotCallback(self, result);
 
                 return result;
             });
@@ -91,10 +95,16 @@ angular.module('servicesModule')
 
         paginationData.prototype.getPrevPage = function () {
             this.pageIndex--;
+            runDataGotCallback(this, this.records[this.pageIndex]);
         };
 
         paginationData.prototype.getPages = function () {
             return new Array(this.records.length);
+        };
+
+        paginationData.prototype.gotoPage = function ($index) {
+            this.pageIndex = $index;
+            runDataGotCallback(this, this.records[this.pageIndex]);
         };
 
         return paginationData;
