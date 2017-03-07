@@ -79,9 +79,10 @@ angular.module('servicesModule')
         }
 
         paginationData.prototype.getNextPage = function (data) {
+            var self = this;
             return getNextPage(this, data).then(function (result) {
-                if (typeof this.dataGotCallback === 'function') {
-                    this.dataGotCallback(result);
+                if (typeof self.dataGotCallback === 'function') {
+                    self.dataGotCallback(result);
                 }
 
                 return result;
