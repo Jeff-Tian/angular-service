@@ -26,45 +26,62 @@ angular.module('servicesModule')
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
                 this.pageSize = queryData.pageSize;
+                this.dataGotCallback = queryData.dataGotCallback;
+            }
+        }
+
+        function getNextPageFromServer(context, data) {
+            var pageData = angular.extend({}, context.queryData, {
+                pageState: context.pageState,
+                pageSize: context.pageSize
+            }, data);
+
+            if (context.method === 'get') {
+                pageData = {
+                    params: pageData
+                };
+            }
+
+            return $http[context.method](context.sourceUrl, pageData).then(function (result) {
+                result = result.data;
+
+                if (result[context.dataField]) {
+                    context.pageIndex++;
+                    context.records.push(context.dataMapping(result[context.dataField]));
+                }
+
+                if (result.pageState !== context.pageState) {
+                    context.pageState = result.pageState;
+                } else {
+                    context.pageState = null;
+                }
+
+                return result;
+            });
+        }
+
+        function getNextPageFromCache(context) {
+            context.pageIndex++;
+
+            return $q.resolve(context.records[context.pageIndex]);
+        }
+
+        function getNextPage(context, data) {
+            if (context.pageIndex < (context.records.length - 1)) {
+                return getNextPageFromCache(context);
+            } else {
+                return getNextPageFromServer(context, data);
             }
         }
 
         paginationData.prototype.getNextPage = function (data) {
-            if (this.pageIndex < (this.records.length - 1)) {
-                this.pageIndex++;
-
-                return $q.resolve(this.records[this.pageIndex]);
-            } else {
-                var self = this;
-
-                var pageData = angular.extend({}, self.queryData, {
-                    pageState: self.pageState,
-                    pageSize: self.pageSize
-                }, data);
-
-                if (self.method === 'get') {
-                    pageData = {
-                        params: pageData
-                    };
+            return getNextPage(this, data).then(function (result) {
+                if (typeof this.dataGotCallback === 'function') {
+                    this.dataGotCallback(result);
                 }
 
-                return $http[self.method](self.sourceUrl, pageData).then(function (result) {
-                    result = result.data;
-
-                    if (result[self.dataField]) {
-                        self.pageIndex++;
-                        self.records.push(self.dataMapping(result[self.dataField]));
-                    }
-
-                    if (result.pageState !== self.pageState) {
-                        self.pageState = result.pageState;
-                    } else {
-                        self.pageState = null;
-                    }
-
-                    return result;
-                });
-            }
+                return result;
+            });
         };
 
         paginationData.prototype.getPrevPage = function () {
