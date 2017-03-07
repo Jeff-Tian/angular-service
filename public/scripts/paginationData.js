@@ -1,6 +1,6 @@
 angular.module('servicesModule')
     .factory('httpPaginationData', ['$http', '$q', function ($http, $q) {
-        function paginationData(sourceUrl, queryData) {
+        function paginationData(sourceUrl, queryData, settings) {
             this.records = [];
             this.pageState = null;
             this.pageIndex = -1;
@@ -26,7 +26,7 @@ angular.module('servicesModule')
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
                 this.pageSize = queryData.pageSize;
-                this.dataGotCallback = queryData.dataGotCallback;
+                this.dataGotCallback = settings.dataGotCallback;
             }
         }
 
