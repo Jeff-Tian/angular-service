@@ -22,12 +22,16 @@ angular.module('servicesModule')
                 this.dataField = options.dataField || this.dataField;
                 this.dataMapping = options.dataMapping || this.dataMapping;
                 this.pageSize = options.pageSize;
+                this.dataGotCallback = options.dataGotCallback;
             } else {
                 this.sourceUrl = sourceUrl;
                 this.queryData = queryData;
                 this.pageSize = queryData.pageSize;
                 this.dataGotCallback = settings.dataGotCallback;
             }
+
+            console.log('data got callback = ', this.dataGotCallback);
+            console.log('typeof callback = ', typeof this.dataGotCallback);
         }
 
         function getNextPageFromServer(context, data) {
