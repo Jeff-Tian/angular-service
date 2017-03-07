@@ -60,7 +60,7 @@ angular.module('servicesModule')
                     context.pageState = null;
                 }
 
-                return result;
+                return result[context.dataField];
             });
         }
 
