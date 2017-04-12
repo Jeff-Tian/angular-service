@@ -50,7 +50,7 @@ angular.module('servicesModule')
             var dfd = $q.defer();
 
             httpPromise
-                .success(function (res) {
+                .then(function (res) {
                     if (res.isSuccess) {
                         dfd.resolve(res.result || res.results);
                     } else {
@@ -67,13 +67,14 @@ angular.module('servicesModule')
                             dfd.reject(res.message || '服务器返回错误的数据');
                         }
                     }
-                }).error(function (reason) {
-                dfd.reject(reason);
+                }, function (reason) {
+                    dfd.reject(reason);
 
-                if (reason && reason.code && String(reason.code) === '401' && window.location.pathname !== '/sign-in') {
-                    window.location.href = '/sign-in?return_url=' + encodeURIComponent(window.location.href);
-                }
-            });
+                    if (reason && reason.code && String(reason.code) === '401' && window.location.pathname !== '/sign-in') {
+                        window.location.href = '/sign-in?return_url=' + encodeURIComponent(window.location.href);
+                    }
+                })
+            ;
 
             return dfd.promise;
         }
