@@ -45,7 +45,7 @@ var scriptLocation = url.parse(mydir);
  * @returns {{}}
  */
 angular.module('servicesModule')
-    .factory('service', ['$http', '$q', function ($http, $q) {
+    .factory('service', ['api', '$q', function ($http, $q) {
         function handleHttpPromise(httpPromise) {
             var dfd = $q.defer();
 

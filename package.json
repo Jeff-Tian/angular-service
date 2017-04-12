@@ -1,6 +1,6 @@
 {
   "name": "angular-service",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "Wrap $http to handle service's 200 OK error response.",
   "main": "dist/scripts/all.min.js",
   "dependencies": {},

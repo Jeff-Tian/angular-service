@@ -1,1 +1,1 @@
-angular.module('servicesModule', []);
+angular.module('servicesModule', ['serviceCacheCoreModule']);
