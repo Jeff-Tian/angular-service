@@ -51,6 +51,8 @@ angular.module('servicesModule')
 
             httpPromise
                 .then(function (res) {
+                    res = res.data;
+
                     if (res.isSuccess) {
                         dfd.resolve(res.result || res.results);
                     } else {
@@ -68,6 +70,8 @@ angular.module('servicesModule')
                         }
                     }
                 }, function (reason) {
+                    reason = reason.data;
+
                     dfd.reject(reason);
 
                     if (reason && reason.code && String(reason.code) === '401' && window.location.pathname !== '/sign-in') {
