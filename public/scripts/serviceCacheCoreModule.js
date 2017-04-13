@@ -86,10 +86,14 @@
 
             var api = {};
 
-            ['get', 'post', 'put', 'delete'].map(function (m) {
+            ['get'].map(function (m) {
                 api[m] = function (url, data) {
                     return getApiResult(m, url, data);
                 };
+            });
+
+            ['post', 'put', 'delete'].map(function (m) {
+                api[m] = $http[m];
             });
 
             return api;
