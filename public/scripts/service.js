@@ -70,7 +70,7 @@ angular.module('servicesModule')
                         }
                     }
                 }, function (reason) {
-                    reason = reason.data;
+                    reason = reason ? reason.data : '未收到服务器数据';
 
                     dfd.reject(reason);
 
