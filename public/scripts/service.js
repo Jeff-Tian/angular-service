@@ -51,6 +51,10 @@ angular.module('servicesModule')
 
             httpPromise
                 .then(function (res) {
+                    if (!res) {
+                        return dfd.reject('未收到服务器数据');
+                    }
+
                     res = res.data;
 
                     if (res.isSuccess) {
