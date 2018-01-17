@@ -2,7 +2,16 @@
 Wrap $http to handle service's 200 OK error response.
 Wrap pagination data to handle pageState indicated pagination data.
 
+# why use this instead of $http
+Ideally, when api rejects to service a client request, it should return an error message with http error codes such as 4xx, 5xx. But in reality there are APIs returns 200 OK http status code, but actually it fails to serve the client request. It defines another error code system instead of http status codes, so these 200 OK errors can't be caught by the $http's error callback,  in consequence you will need to write error handling code in the success callback. And that's what this angular-service comes in handy, it enables you that only need to write error handling code in error callback.
+
 # Contribution Notice:
+```
+npm install gulp-cli -g
+npm install gulp -D
+npm install
+gulp
+```
 Run `gulp` before making `git commit`. So the `dist` folder will be updated.
 
 # Install

@@ -4,7 +4,15 @@
   "description": "Wrap $http to handle service's 200 OK error response.",
   "main": "dist/scripts/all.min.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-print": "^2.0.1",
+    "gulp-uglify": "^3.0.0",
+    "run-sequence": "^2.2.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
